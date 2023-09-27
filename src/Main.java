@@ -10,36 +10,40 @@ public class Main {
         //creating a new Galgje Word: wordToBeGuessed
         String wordToBeGuessed = CreateGalgjeWord.listOfWords[CreateGalgjeWord.random_int].toUpperCase();
         System.out.println(wordToBeGuessed);
-        System.out.println("The word you need to guess is " + wordToBeGuessed.length() + " letters long.");
 
         //converting the wordToBeGuessed into an array: arrayWordToBeGuessed
         char[] arrayWordToBeGuessed = new char[wordToBeGuessed.length()];
         for (int i = 0; i < wordToBeGuessed.length(); i++) {
             arrayWordToBeGuessed[i] = wordToBeGuessed.charAt(i);
         }
-//        Alleen van toepassing bij printen
-//        for (char letterWordToBeGuessed : arrayWordToBeGuessed) {
-//            System.out.println(letterWordToBeGuessed);
-//        }
 
-        //Visualising the word for the player
-        String[] strArray = {};
-        List<String> visualisedWordToBeGuessed = new ArrayList<>(Arrays.asList(strArray));
+
+        String[] displayedWord = new String[wordToBeGuessed.length()];
         for (int i = 0; i < wordToBeGuessed.length(); i++) {
-            visualisedWordToBeGuessed.add("_ ");
-        }
-        for (String val : visualisedWordToBeGuessed) {
-            System.out.print(val);
+            displayedWord[i] = "_";
         }
 
+        for (String i : displayedWord) {
+            while (i.equals("_")) {
+                System.out.println("jeej");
+            }
+        }
 
         //number of tries
         int numberOfTriesLeft = 10;
-        System.out.println("\nYou have " + numberOfTriesLeft + " tries left.");
+        System.out.println("You have " + numberOfTriesLeft + " tries left.");
+
+//        //Visualising the word for the player
+//        VisualizingWord galgjeword = new VisualizingWord();
+//        galgjeword.visualize(wordToBeGuessed);
+
+        for (int i = 0; i < wordToBeGuessed.length(); i++) {
+            System.out.print(displayedWord[i]);
+        }
 
         //Player chooses letter: chosenLetter
         Scanner ChooseALetter = new Scanner(System.in);
-        System.out.print("Which letter do you want to guess? ");
+        System.out.print("\nWhich letter do you want to guess? ");
         String chosenLetter = ChooseALetter.next().toUpperCase();
 
         //chosenLetter is checked to see if it's valid
@@ -58,24 +62,20 @@ public class Main {
             System.out.println("The letter you chose is not in the word :(");
         }
 
-            /*
-            If letter in word:
-            go through letters in arrayWordToBeGuessed
-            compare to chosenLetter
-            safe index
-            replace same index of visualisedWordToBeGuessed with ChosenLetter
-            go on with loop
-            do numberOfTriesLeft -1
-             */
 
-        for (char letterWordToBeGuessed : arrayWordToBeGuessed) {
-            if (letterWordToBeGuessed.equals(charChosenLetter)){
-
+        //Checking where in the word the letter is
+        for (int i = 0; i < arrayWordToBeGuessed.length; i++) {
+            if (arrayWordToBeGuessed[i] == charChosenLetter){
+                displayedWord[i] = chosenLetter;
             }
+        }
+        //printing the displayed word
+        for (int i = 0; i < wordToBeGuessed.length(); i++) {
+            System.out.print(displayedWord[i]);
         }
 
 
-//        //Displaying the guessed letter in visualisedWordToBeGuessed
+
 
 
     }
@@ -90,3 +90,14 @@ ChosenLetter is given by Player
 
 
  */
+
+  /*
+            If letter in word:
+            go through letters in arrayWordToBeGuessed
+            compare to chosenLetter
+            safe index
+            replace same index of visualisedWordToBeGuessed with ChosenLetter
+            go on with loop
+            do numberOfTriesLeft -1
+             */
+//Displaying the guessed letter in visualisedWordToBeGuessed
