@@ -68,11 +68,11 @@ public class Main {
             do numberOfTriesLeft -1
              */
 
-//        for (char letterWordToBeGuessed : arrayWordToBeGuessed) {
-//            if (letterWordToBeGuessed.equals(charChosenLetter)){
-//
-//            }
-//        }
+        for (char letterWordToBeGuessed : arrayWordToBeGuessed) {
+            if (letterWordToBeGuessed.equals(charChosenLetter)){
+
+            }
+        }
 
 
 //        //Displaying the guessed letter in visualisedWordToBeGuessed
