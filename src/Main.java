@@ -6,6 +6,9 @@ import java.lang.*;
 
 public class Main {
     public static void main(String[] args) {
+        //Welcome message
+        System.out.println("Welcome to Galgje! Please choose a letter to guess the word. You can make 10 mistakes untill it is game over.");
+
 
         //creating a new Galgje Word: wordToBeGuessed
         String wordToBeGuessed = CreateGalgjeWord.listOfWords[CreateGalgjeWord.random_int].toUpperCase();
@@ -17,62 +20,85 @@ public class Main {
             arrayWordToBeGuessed[i] = wordToBeGuessed.charAt(i);
         }
 
-
+        //Displaying word that needs to be guessed
         String[] displayedWord = new String[wordToBeGuessed.length()];
         for (int i = 0; i < wordToBeGuessed.length(); i++) {
             displayedWord[i] = "_";
         }
 
-        for (String i : displayedWord) {
-            while (i.equals("_")) {
-                System.out.println("jeej");
+        int numberOfFaultsLeft = 10;
+
+        String[] guessedLetters = {};
+        List<String> listGuessedLetters = new ArrayList<>(Arrays.asList(guessedLetters));
+//        listGuessedLetters.add("Boston");
+//        for(String val : listGuessedLetters) {
+//            System.out.print(val + " ");
+//        }
+
+        for (String some : displayedWord) {
+            //while there are still unguessed letters
+            while (some.equals("_")) {
+                //Displaying the word in empty spaces and guessed letters
+                for (int i = 0; i < wordToBeGuessed.length(); i++) {
+                    System.out.print(displayedWord[i]);
+                }
+
+                //Player chooses letter: chosenLetter
+                Scanner ChooseALetter = new Scanner(System.in);
+                System.out.print("\nWhich letter do you want to guess? ");
+                String chosenLetter = ChooseALetter.next().toUpperCase();
+
+                //chosenLetter is checked to see if it's valid
+                // Later doen door Swing instelling Formatted Text Field
+
+                //String chosenLetter converting to char
+                char charChosenLetter = chosenLetter.charAt(0);
+
+
+                //Checking if the letter is in the wordToBeGuessed, and displaying message
+                boolean LetterInWord = wordToBeGuessed.contains(chosenLetter);
+                if (LetterInWord) {
+                    System.out.println("You choose letter: " + charChosenLetter + ". The letter you chose is in the word :)");
+                } else {
+                    System.out.println("You choose letter: " + charChosenLetter + ". The letter you chose is not in the word :(");
+                    numberOfFaultsLeft -= 1;
+
+                }
+
+                //number of tries
+                System.out.println("You have " + numberOfFaultsLeft + " faults left.");
+
+                //list of letters already guessed, displayed to player
+                listGuessedLetters.add(chosenLetter);
+                System.out.print("Letters you already guessed: ");
+                for(String val : listGuessedLetters) {
+                    System.out.print(val + " ");
+                }
+                System.out.println();
+
+
+                //Checking where in the word the letter is and filling it in the display word
+                for (int i = 0; i < arrayWordToBeGuessed.length; i++) {
+                    if (arrayWordToBeGuessed[i] == charChosenLetter){
+                        displayedWord[i] = chosenLetter;
+                    }
+                }
+
+
+
+
             }
+
         }
 
-        //number of tries
-        int numberOfTriesLeft = 10;
-        System.out.println("You have " + numberOfTriesLeft + " tries left.");
+
 
 //        //Visualising the word for the player
 //        VisualizingWord galgjeword = new VisualizingWord();
 //        galgjeword.visualize(wordToBeGuessed);
 
-        for (int i = 0; i < wordToBeGuessed.length(); i++) {
-            System.out.print(displayedWord[i]);
-        }
-
-        //Player chooses letter: chosenLetter
-        Scanner ChooseALetter = new Scanner(System.in);
-        System.out.print("\nWhich letter do you want to guess? ");
-        String chosenLetter = ChooseALetter.next().toUpperCase();
-
-        //chosenLetter is checked to see if it's valid
-        // Later doen door Swing instelling Formatted Text Field
-
-        //String chosenLetter converting to char
-        char charChosenLetter = chosenLetter.charAt(0);
-        System.out.println("You choose letter: " + charChosenLetter);
 
 
-        //Checking if the letter is in the wordToBeGuessed, and displaying message
-        boolean LetterInWord = wordToBeGuessed.contains(chosenLetter);
-        if (LetterInWord) {
-            System.out.println("The letter you chose is in the word :)");
-        } else {
-            System.out.println("The letter you chose is not in the word :(");
-        }
-
-
-        //Checking where in the word the letter is
-        for (int i = 0; i < arrayWordToBeGuessed.length; i++) {
-            if (arrayWordToBeGuessed[i] == charChosenLetter){
-                displayedWord[i] = chosenLetter;
-            }
-        }
-        //printing the displayed word
-        for (int i = 0; i < wordToBeGuessed.length(); i++) {
-            System.out.print(displayedWord[i]);
-        }
 
 
 
