@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         HelloWorld.printHelloworld();
-
 
         //creating a new Galgje Word: wordToBeGuessed
         String wordToBeGuessed = CreateGalgjeWord.listOfWords[CreateGalgjeWord.random_int].toUpperCase();
@@ -12,9 +13,14 @@ public class Main {
         System.out.println("The word you need to guess is " + wordToBeGuessed.length() + " letters long.");
 
         //Visualising the word for the player
-        String cube = " [ ] ";
-        String progressWordToBeGuessed = cube.repeat(wordToBeGuessed.length());
-        System.out.println(progressWordToBeGuessed);
+        String[] strArray = {};
+        List<String> visualisedWordToBeGuessed = new ArrayList<>(Arrays.asList(strArray));
+        for (int i = 0; i < wordToBeGuessed.length(); i++) {
+            visualisedWordToBeGuessed.add(" [   ] ");
+        }
+        for(String val : visualisedWordToBeGuessed) {
+            System.out.print(val);
+        }
 
 
         //number of tries
@@ -42,7 +48,7 @@ public class Main {
          */
 
 
-
+        //Checking if the letter is in the wordToBeGuessed, and displaying message
         boolean LetterInWord = wordToBeGuessed.contains(chosenLetter);
         if (LetterInWord) {
             System.out.println("The letter you chose is in the word :)");
@@ -51,11 +57,10 @@ public class Main {
                 System.out.println(index);
                 index = wordToBeGuessed.indexOf(chosenLetter, index + 1);
             }
-
         }
         else {
             System.out.println("The letter you chose is not in the word :(");
-            }
+        }
 
 
 
